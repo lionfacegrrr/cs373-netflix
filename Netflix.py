@@ -14,52 +14,56 @@
 def netflix_read (r) :
     """
     r is a  reader
-    returns an generator that iterates over a sequence of lists of ints of length 2
-    for s in r :
-        l = s.split()
-        b = int(l[0])
-        e = int(l[1])
-        yield [b, e]
     """
-    line = (map(str, s.split(' ')) for s in r)
-	if line[2]
+    line = (map(str, s.split()) for s in r)
+    if len(line) == 3 :
+        return line
+    elif len(line) == 2 :
+        return line
+    else:
+        print ("we have a problem in read \n")
 #this isnt working right now so fix it 
     return line
 
 
 
-
 # ------------
-# netflix_eval
+# netflix_eval_movie
 # ------------
 
-def netflix_eval ((idnumber, punctuation, date),w) :
-
-#assert (idnumber <> None)
-#assert (punctuation <> None)
-    if date == None :
-    	w.write("movie :   >")
-    	return 1
-    else:
-    	w.write("vote      >")
-    	return 2
+def netflix_eval_movie ((idnumber, punctuation),w) :
+    print ("--we could read the line and it is now in movie-- \n")
     return 0
 
+
+# ------------
+# netflix_eval_user
+# ------------
+
+def netflix_eval_user ((idnumber, punctuation, date),w) :
+
+    print ("~~we could read the line and can listen to the customer~~")
+    return 1
+
 # -------------
-# netflix_print
+# netflix_print_user
 # -------------
 
-def netflix_print (w, (idnumber, punctuation, date), prediction) :
+def netflix_print_user (w, (idnumber, punctuation, date), prediction) :
     """
 
     """
-#assert (idnumber <> None)
-#assert (punctuation <> None)
-    if date == None :
-    	w.write(str(idnumber) + " " + str(punctuation) + "\n")
-    else:
     	w.write(str(idnumber) + " " + str(punctuation) + " " + str(date) + " " + str(prediction) + "\n")
-    
+
+# -------------
+# netflix_print_movie
+# -------------
+
+def netflix_print_movie (w, (idnumber, punctuation), prediction) :
+    """
+        
+        """
+            w.write(str(idnumber) + " " + str(punctuation) + " " + str(prediction) + "\n")
 
 # -------------
 # netflix_solve
@@ -74,4 +78,11 @@ def netflix_solve (r, w) :
     """
     for t in netflix_read(r) :
         prediction = netflix_eval(t,w)
-        netflix_print(w, t, prediction)
+        if len(prediction) == 3 :
+            netflix_eval_user(prediction,w)
+            netflix_print_user(w, t, prediction)
+        elif len(prediction) == 2 :
+            netflix_eval_movie(prediction,w)
+            netflix_print_movie(w, t, prediction)
+        else:
+            print ("we have a problem in solve \n")

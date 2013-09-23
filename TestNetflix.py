@@ -21,7 +21,7 @@
 import StringIO
 import unittest
 
-from Netflix import netflix_read, netflix_eval, netflix_print, netflix_solve
+from Netflix import netflix_read, netflix_eval_movie, netflix_print_movie, netflix_solve
 
 # -----------
 # TestNetflix
@@ -44,9 +44,9 @@ class TestNetflix (unittest.TestCase) :
     # eval
     # ----
     #looking to see if it can read a movie
-    def test_eval_1 (self) :
+    def test_eval_movie (self) :
         v = netflix_eval((1 , ':'))
-        self.assert_(v == 1)
+        self.assert_(v == 0)
     
 
     # -----
@@ -55,8 +55,8 @@ class TestNetflix (unittest.TestCase) :
     #looking to see if i can print a movie
     def test_print_1 (self) :
         w = StringIO.StringIO()
-        netflix_print(w, (1, ':', None), 1)
-        self.assert_(w.getvalue() == "1 : 1\n")
+        netflix_print_movie(w, (1, ':'), 1)
+        self.assert_(w.getvalue() == "1 : 0\n")
 
     
     # -----
@@ -67,7 +67,7 @@ class TestNetflix (unittest.TestCase) :
         r = StringIO.StringIO(" 1 :\n 2 :\n 3 :\n")
         w = StringIO.StringIO()
         netflix_solve(r, w)
-        self.assert_(w.getvalue() == " 1 : 1\n 2 : 1\n 3 : 1\n")
+        self.assert_(w.getvalue() == " 1 : 0\n 2 : 0\n 3 : 0\n")
 
 
 
