@@ -8,6 +8,12 @@
 # ---------------------------
 
 # ------------
+# imports
+# ------------
+
+import io
+
+# ------------
 # netflix_read
 # ------------
 
@@ -34,7 +40,7 @@ def netflix_read (r) :
 # ------------
 
 def netflix_eval_movie ((idnumber, punctuation),w) :
-    print ("--we could read the line and it is now in movie-- \n")
+    #print ("--we could read the line and it is now in movie-- \n")
     return 0
 
 
@@ -44,7 +50,7 @@ def netflix_eval_movie ((idnumber, punctuation),w) :
 
 def netflix_eval_user ((idnumber),w) :
 
-    print ("~~we could read the line and can listen to the customer~~")
+    #print ("~~we could read the line and can listen to the customer~~")
     return 1
 
 # -------------
@@ -78,7 +84,10 @@ def netflix_solve (r, w) :
     w is a writer
     t is a line from reader
     \/at some point i should impliment a function to gain access to their caches here
+    #training = io.open("/u/downing/cs/netflix/training_set/*", "r")
     """
+    titles = io.open("/u/downing/cs/netflix/movie_titles.txt", "r")
+    qualifying = io.open("/u/downing/cs/netflix/qualifying.txt", "r")
     for t in netflix_read(r) :
     	rateing = -1
         if len(t) == 1 :
@@ -89,3 +98,4 @@ def netflix_solve (r, w) :
         	netflix_print_movie(w, t)
         else:
             w.write("we have a problem in solve \n")
+        w.write(str(titles) + "\n \n \n" + str(qualifying) + "\n")
