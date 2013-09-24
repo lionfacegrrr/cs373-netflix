@@ -12,18 +12,20 @@
 # ------------
 
 def netflix_read (r) :
+    return (map(str, s.split()) for s in r)
     """
-    r is a  reader
-    """
-    line = (map(str, s.split()) for s in r)
-    if len(line) == 3 :
+        r is a  reader
+        
+        old code:
+        if len(line) == 3 :
         return line
-    elif len(line) == 2 :
+        elif len(line) == 2 :
         return line
-    else:
+        else:
         print ("we have a problem in read \n")
-#this isnt working right now so fix it 
-    return line
+        #this isnt working right now so fix it
+        return line
+    """
 
 
 
@@ -53,7 +55,7 @@ def netflix_print_user (w, (idnumber, punctuation, date), prediction) :
     """
 
     """
-    	w.write(str(idnumber) + " " + str(punctuation) + " " + str(date) + " " + str(prediction) + "\n")
+    w.write(str(idnumber) + " " + str(punctuation) + " " + str(date) + " "+ str(prediction) + "\n")
 
 # -------------
 # netflix_print_movie
@@ -61,9 +63,9 @@ def netflix_print_user (w, (idnumber, punctuation, date), prediction) :
 
 def netflix_print_movie (w, (idnumber, punctuation), prediction) :
     """
-        
-        """
-            w.write(str(idnumber) + " " + str(punctuation) + " " + str(prediction) + "\n")
+    
+    """
+    w.write(str(idnumber) + " " + str(punctuation) + " " + str(prediction) + "\n")
 
 # -------------
 # netflix_solve
@@ -76,13 +78,13 @@ def netflix_solve (r, w) :
     w is a writer
     t is a line from reader
     """
+    prediction = -1
     for t in netflix_read(r) :
-        prediction = netflix_eval(t,w)
-        if len(prediction) == 3 :
-            netflix_eval_user(prediction,w)
+        if len(t) == 3 :
+            prediction = netflix_eval_user(t,w)
             netflix_print_user(w, t, prediction)
-        elif len(prediction) == 2 :
-            netflix_eval_movie(prediction,w)
+        elif len(t) == 2 :
+            predictoin = netflix_eval_movie(t,w)
             netflix_print_movie(w, t, prediction)
         else:
-            print ("we have a problem in solve \n")
+            w.write("we have a problem in solve \n")
