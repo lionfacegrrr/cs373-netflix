@@ -42,7 +42,7 @@ def netflix_eval_movie ((idnumber, punctuation),w) :
 # netflix_eval_user
 # ------------
 
-def netflix_eval_user ((idnumber, punctuation, date),w) :
+def netflix_eval_user ((idnumber),w) :
 
     print ("~~we could read the line and can listen to the customer~~")
     return 1
@@ -51,21 +51,21 @@ def netflix_eval_user ((idnumber, punctuation, date),w) :
 # netflix_print_user
 # -------------
 
-def netflix_print_user (w, (idnumber, punctuation, date), prediction) :
+def netflix_print_user (w, idnumber, prediction) :
     """
 
     """
-    w.write(str(idnumber) + " " + str(punctuation) + " " + str(date) + " "+ str(prediction) + "\n")
+    w.write(str(idnumber) + " " + str(prediction) + "\n")
 
 # -------------
 # netflix_print_movie
 # -------------
 
-def netflix_print_movie (w, (idnumber, punctuation), prediction) :
+def netflix_print_movie (w, (idnumber, punctuation)) :
     """
     
     """
-    w.write(str(idnumber) + " " + str(punctuation) + " " + str(prediction) + "\n")
+    w.write(str(idnumber) + " " + str(punctuation) + "\n")
 
 # -------------
 # netflix_solve
@@ -77,14 +77,15 @@ def netflix_solve (r, w) :
     r is a reader
     w is a writer
     t is a line from reader
+    \/at some point i should impliment a function to gain access to their caches here
     """
-    prediction = -1
     for t in netflix_read(r) :
-        if len(t) == 3 :
-            prediction = netflix_eval_user(t,w)
-            netflix_print_user(w, t, prediction)
+    	rateing = -1
+        if len(t) == 1 :
+        	rateing = netflix_eval_user(t,w)
+        	netflix_print_user(w, t[0], rateing)
         elif len(t) == 2 :
-            predictoin = netflix_eval_movie(t,w)
-            netflix_print_movie(w, t, prediction)
+        	rateing = netflix_eval_movie(t,w)
+        	netflix_print_movie(w, t)
         else:
             w.write("we have a problem in solve \n")
