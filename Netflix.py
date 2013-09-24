@@ -85,9 +85,9 @@ def netflix_solve (r, w) :
     t is a line from reader
     \/at some point i should impliment a function to gain access to their caches here
     #training = io.open("/u/downing/cs/netflix/training_set/*", "r")
-    """
-    titles = io.open("/u/downing/cs/netflix/movie_titles.txt", "r")
     qualifying = io.open("/u/downing/cs/netflix/qualifying.txt", "r")
+    """
+    titles = open('movie_titles.txt').readlines()
     for t in netflix_read(r) :
     	rateing = -1
         if len(t) == 1 :
@@ -98,4 +98,4 @@ def netflix_solve (r, w) :
         	netflix_print_movie(w, t)
         else:
             w.write("we have a problem in solve \n")
-        w.write(str(titles) + "\n \n \n" + str(qualifying) + "\n")
+	print (str(titles) + "\n")
