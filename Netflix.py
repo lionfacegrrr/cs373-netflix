@@ -61,7 +61,7 @@ def netflix_print_user (w, idnumber, prediction) :
     """
 
     """
-    w.write(str(idnumber) + " " + str(prediction) + "\n")
+    #w.write(str(idnumber) + " " + str(prediction) + "\n")
 
 # -------------
 # netflix_print_movie
@@ -71,7 +71,7 @@ def netflix_print_movie (w, (idnumber, punctuation)) :
     """
     
     """
-    w.write(str(idnumber) + " " + str(punctuation) + "\n")
+    #w.write(str(idnumber) + " " + str(punctuation) + "\n")
 
 # -------------
 # netflix_solve
@@ -88,6 +88,7 @@ def netflix_solve (r, w) :
     qualifying = io.open("/u/downing/cs/netflix/qualifying.txt", "r")
     """
     titles = open('movie_titles.txt').readlines()
+    titles.reverse()
     for t in netflix_read(r) :
     	rateing = -1
         if len(t) == 1 :
@@ -98,4 +99,7 @@ def netflix_solve (r, w) :
         	netflix_print_movie(w, t)
         else:
             w.write("we have a problem in solve \n")
-	print (str(titles) + "\n")
+    liltitles = titles.pop()
+    print (liltitles + "\n")
+    liltitles = titles.pop()
+    print (liltitles + "\n")
