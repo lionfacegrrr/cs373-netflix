@@ -149,8 +149,127 @@ Good luck!
 MD5 SIGNATURES AND FILE SIZES
 ================================================================================
 
-d2b86d3d9ba8b491d62a85c9cf6aea39        577547 movie_titles.txt
-ed843ae92adbc70db64edbf825024514      10782692 probe.txt
-88be8340ad7b3c31dfd7b6f87e7b9022      52452386 qualifying.txt
-0e13d39f97b93e2534104afc3408c68c           567 rmse.pl
-0098ee8997ffda361a59bc0dd1bdad8b    2081556480 training_set.tar
+d2b86d3d9ba8b491d62a85c9cf6aea39        577547 movie_titles.txt #same in my code
+ed843ae92adbc70db64edbf825024514      10782692 probe.txt #in my program this is RunNetflix.in
+88be8340ad7b3c31dfd7b6f87e7b9022      52452386 qualifying.txt #same in my code
+0e13d39f97b93e2534104afc3408c68c           567 rmse.pl #dont think i need this since i can implement and/or use library according to piazza
+0098ee8997ffda361a59bc0dd1bdad8b    2081556480 training_set.tar #not sure how i can deal with this
+
+
+
+
+----------------------------------------------------------------------------------------------------
+Netflix Prize Data Set  
+
+Abstract: This is the official data set used in the Netflix Prize 
+competition. The data consists of about 100 million movie ratings, and 
+the goal is to predict missing entries in the movie-user rating matrix.
+
+------------------------------------------------------------------------
+
+Data Set Characteristics:  Multivariate, Time-Series
+Attribute Characteristics: Integer
+Associated Tasks: Clustering, Recommender-Systems
+Number of Instances: 100480507
+Number of Attributes: 17770
+Area: N/A
+Missing Values? Yes
+Date Donated: 2009-09-21
+
+------------------------------------------------------------------------
+
+Source:
+
+Netflix Prize
+
+http://www.netflixprize.com
+
+------------------------------------------------------------------------
+
+Data Set Information:
+
+This dataset was constructed to support participants in the Netflix Prize. See
+http://www.netflixprize.com/ for details about the prize.
+
+There are over 480,000 customers in the dataset, each identified by a
+unique integer id.
+
+The title and release year for each movie is also provided. There are over
+17,000 movies in the dataset, each identified by a unique integer id.
+
+The dataset contains over 100 million ratings. The ratings were collected
+between October 1998 and December 2005 and reflect the distribution of all
+ratings received during this period. Each rating has a customer id, a movie id,
+the date of the rating, and the value of the rating.
+
+As part of the original Netflix Prize a set of ratings was identified whose
+rating values were not provided in the original dataset. The object of the
+Prize was to accurately predict the ratings from this 'qualifying' set. These
+missing ratings are now available in the grand_prize.tar.gz dataset file. 
+
+-------------------------------------------------------------------------------
+
+Attribute Information:
+
+The format of the data is described fully in the README files contained in the
+dataset tar files.
+
+MovieID:
+Arbitrarily assigned unique integer in the range [1 .. 17770].
+
+CustomerID:
+Arbitrarily assigned unique integer in the range [1..2649429] (with gaps).
+
+Rating:
+Number of 'stars' assigned to a movie by a customer; an integer from 1 to 5.
+
+Title:
+English language title of the movie on the Netflix website.
+
+YearOfRelease:
+Year a movie was released in the range [1890..2005]. May correspond to the
+release of corresponding DVD, not necessarily its theaterical release.
+
+Date:
+Timestamp of a rating in the form YYYY-MM-DD, in the range 1998-11-01 to
+2005-12-31.
+
+NetflixID:
+Integer ID of a movie as currently used in the Netflix developer API 
+http://developer.netflix.com/
+
+--------------------------------------------------------------------------------
+
+Relevant Papers:
+
+James Bennett and Stan Lanning. "The Netflix Prize", 2007. 
+http://rexa.info/paper/4755326FDAE3929649348DC380A46D3882A98198
+
+---------------------------------------------------------------------------------
+
+Citation Request:
+
+
+USAGE LICENSE:
+
+Netflix cannot guarantee the correctness of the data, its suitability for any
+particular purpose, or the validity of results based on the use of the data set.
+The data set may be used for any research purposes under the following
+conditions:
+
+* The user may not state or imply any endorsement from Netflix.
+
+* The user must acknowledge the use of the data set in
+publications resulting from the use of the data set, and must
+send us an electronic or paper copy of those publications.
+
+* The user may not redistribute the data without separate
+permission from Netflix.
+
+* The user may not use this information for any commercial or
+revenue-bearing purposes without first obtaining permission
+from Netflix, and may not attempt to de-anonymize the data or
+otherwise associate it with personally identifying information.
+
+If you have any further questions or comments, please contact the Prize
+administrator: prizemaster '@' netflix.com.
