@@ -115,13 +115,14 @@ def netflix_solve (r, w) :
 	    	currentuser = int(nums)
 	    	currentuserrate += currentmovierate
 	    	currentuserrate /= 2
-	    	w.write(nums +  "	user:" + str(currentuser) + "	rate:" + str(currentuserrate)  + "\n")
+	    	w.write(nums + " " + str(currentuserrate) + "\n")
+	    	#w.write(nums +  "	user:" + str(currentuser) + "	rate:" + str(currentuserrate)  + "\n")
         	#rateing = netflix_eval_user(t,w)
         	#netflix_print_user(w, t[0], rateing)
         elif ':' in nums :
         	currentmovie = int(nums.rstrip(':')) #just remember you still have a : appended to the end
         	currentmovierate = rateing
-	    	w.write(nums + "		"+ "movie:" + str(currentmovie) + "		rate:" + str(currentmovierate)  + "\n")
+	    	w.write(nums + "\n") #+ "		"+ "movie:" + str(currentmovie) + "		rate:" + str(currentmovierate)  + "\n")
 	    	#netflix_print_movie(w, (nums[:(len(nums)-1)], nums[(len(nums)-2):]))
         else:
             w.write("we have a problem in netflix_solve and nums is: " + nums + "\n")
