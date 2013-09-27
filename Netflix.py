@@ -12,6 +12,12 @@
 # ------------
 
 import io
+movies = open('movie_cache.txt').readlines()
+users  = open('users_cache.txt').readlines()
+currentmovie = 0
+currentmovierate = 1
+currentuser  = 0
+currentuserrate = 5
 
 # ------------
 # netflix_read
@@ -40,7 +46,12 @@ def netflix_read (r) :
 # ------------
 
 def netflix_eval_movie ((idnumber, punctuation),w) :
-    #print ("--we could read the line and it is now in movie-- \n")
+    global currentmovie
+    global currentmovierate
+    print ("--we could read the movie--")
+    currentmovie = idnumber
+    w.write("======>" + str(movies.index(idnumber + ":")) + "\n")
+    #w.write(str(idnumber) + " " + str(punctuation) + "\n")
     return 0
 
 
@@ -49,8 +60,8 @@ def netflix_eval_movie ((idnumber, punctuation),w) :
 # ------------
 
 def netflix_eval_user ((idnumber),w) :
-
-    #print ("~~we could read the line and can listen to the customer~~")
+    
+    print ("~~we could read the line and can listen to the customer~~")
     return 1
 
 # -------------
@@ -86,20 +97,31 @@ def netflix_solve (r, w) :
     \/at some point i should impliment a function to gain access to their caches here
     #training = io.open("/u/downing/cs/netflix/training_set/*", "r")
     qualifying = io.open("/u/downing/cs/netflix/qualifying.txt", "r")
-    """
+        
     titles = open('movie_titles.txt').readlines()
     titles.reverse()
-    for t in netflix_read(r) :
-    	rateing = -1
-        if len(t) == 1 :
-        	rateing = netflix_eval_user(t,w)
-        	netflix_print_user(w, t[0], rateing)
-        elif len(t) == 2 :
-        	rateing = netflix_eval_movie(t,w)
-        	netflix_print_movie(w, t)
+    """
+    global movies
+    global users
+    movies.sort()
+    users.sort()
+    nums = 0 #this should be a string representation of what i read in for the line
+    rateing = 3.7 #the best value to start with according to document on assignment
+    for t in netflix_read(r) : #parse through my RunNetflix and look at each line
+    	nums = t[(len(t)-2)]  #take the string from the tuple t (['OUR_STRING'])
+    	#print (nums + "is of type" + str(type(nums)) + "\n")
+        if not ':' in nums : #it must be a customer if no colon
+	    	currentuserrate = rateing + 0.05 #lets assume this guy is a movie buff by .05
+	    	currentuser = int(nums)
+	    	currentuserrate += currentmovierate
+	    	currentuserrate /= 2
+	    	w.write(nums +  "	user:" + str(currentuser) + "	rate:" + str(currentuserrate)  + "\n")
+        	#rateing = netflix_eval_user(t,w)
+        	#netflix_print_user(w, t[0], rateing)
+        elif ':' in nums :
+        	currentmovie = int(nums.rstrip(':')) #just remember you still have a : appended to the end
+        	currentmovierate = rateing
+	    	w.write(nums + "		"+ "movie:" + str(currentmovie) + "		rate:" + str(currentmovierate)  + "\n")
+	    	#netflix_print_movie(w, (nums[:(len(nums)-1)], nums[(len(nums)-2):]))
         else:
-            w.write("we have a problem in solve \n")
-    liltitles = titles.pop()
-    print (liltitles + "\n")
-    liltitles = titles.pop()
-    print (liltitles + "\n")
+            w.write("we have a problem in netflix_solve and nums is: " + nums + "\n")
