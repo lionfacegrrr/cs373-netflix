@@ -78,6 +78,20 @@ def print_rmse (myzipper,w) :
 	"""
 
 # -------------
+# find_needed_lines
+# -------------
+def find_needed_lines (users_keeper) :
+	#my_lookup_file = open('mv_0010034.txt').readlines()
+	neededlist = []
+	with open('mv_0010034.txt', 'r') as inF:
+		for line in inF:
+			for i in users_keeper:
+				if i in line:
+					neededlist.append(line)
+	print(neededlist)
+
+
+# -------------
 # netflix_solve
 # -------------
 
@@ -86,6 +100,7 @@ def netflix_solve (r, w):
 	global expected #remember rob that this list is backwards len()-iter
 	iter = -1
 	#print (str(type(expected)) + "	"+str(expected))
+	users_keeper = []
 	myzipper = [] #this is what we use for zipping my two ratings for rmse
 	nums = 0 #this should be a string representation of what i read in for the line
 	rateing = 3.7 #the best value to start with according to document on assignment
@@ -93,6 +108,7 @@ def netflix_solve (r, w):
 		iter +=1
 		nums = t[(len(t)-2)]
 		if not ':' in nums : #it must be a customer if no colon
+			users_keeper.append(nums)
 			usercount +=1
 			currentuserrate = rateing + 0.05 #lets assume this guy is a movie buff by .05
 			currentuser = int(nums)
@@ -108,3 +124,5 @@ def netflix_solve (r, w):
 		else:
 			w.write("we have a problem in netflix_solve and nums is: " + nums + "\n")
 	print_rmse(myzipper,w)
+	users_keeper = find_needed_lines(users_keeper)
+		
