@@ -13,7 +13,8 @@
 
 import io
 import math
-expected = open('ExpectedRunNetflix.txt').readlines()
+import time
+expected = open('/u/lara/cs373-netflix-tests/lionface-ExpectedRunNetflix.txt').readlines()
 usercount = 0
 currentmovie = 0
 currentmovierate = 1
@@ -68,7 +69,7 @@ def netflix_print_movie (w, (idnumber, punctuation)) :
 
 def print_rmse (myzipper,w) :
 	v = sum([(x - y) ** 2 for x, y in myzipper], 0.0)
-	w.write("RMSE : " + str(math.sqrt(v / usercount)))
+	w.write("RMSE : " + str(math.sqrt(v / usercount)) + "\n")
 	"""
 	here is where i handle getting rmse with my zipper of expected and actual output
 	s = len(a) == usercount
@@ -110,6 +111,7 @@ def netflix_solve (r, w):
 	myzipper = [] #this is what we use for zipping my two ratings for rmse
 	nums = 0 #this should be a string representation of what i read in for the line
 	rateing = 3.9 #the best value to start with according to document on assignment
+	x = (time.clock() * 1000)
 	for t in netflix_read(r) :
 		iter +=1
 		nums = t[(len(t)-2)]
@@ -129,5 +131,8 @@ def netflix_solve (r, w):
 			#w.write(nums + "\n") #+ "		"+ "movie:" + str(currentmovie) + "		rate:" + str(currentmovierate)  + "\n")
 		else:
 			w.write("we have a problem in netflix_solve and nums is: " + nums + "\n")
+		
 	#users_keeper = find_needed_lines(users_keeper,w)
 	print_rmse(myzipper,w)
+	x = ((time.clock() * 1000) - x)
+	print ("Run Time: " + str(x) + "milliseconds")
