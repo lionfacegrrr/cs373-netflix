@@ -74,22 +74,28 @@ def print_rmse (myzipper,w) :
 	s = len(a) == usercount
 	z = zip(a, p) == myzipper
 	v = sum([(x - y) ** 2 for x, y in myzipper], 0.0)
-	w.write("RMSE : " + str(math.sqrt(v / usercount)))
+	#w.write("RMSE : " + str(math.sqrt(v / usercount)))
 	"""
 
 # -------------
-# find_needed_lines
+# find_needed_lines : I used this function to build my cache and then i changed it to refine my cache to just the ratings
 # -------------
-def find_needed_lines (users_keeper) :
+def find_needed_lines (users_keeper,w) :
 	#my_lookup_file = open('mv_0010034.txt').readlines()
 	neededlist = []
-	with open('mv_0010034.txt', 'r') as inF:
+	fixer = 0
+	with open('ExpectedRunNetflix.txt', 'r') as inF:
 		for line in inF:
-			for i in users_keeper:
-				if i in line:
-					neededlist.append(line)
-	print(neededlist)
-
+			if ':' in line :
+				w.write(line)
+			else :
+				for i in line:
+					if fixer == 1 :
+						w.write(i + "\n")
+						fixer = 0
+						break
+					if i == ',' :
+						fixer = 1
 
 # -------------
 # netflix_solve
@@ -103,14 +109,14 @@ def netflix_solve (r, w):
 	users_keeper = []
 	myzipper = [] #this is what we use for zipping my two ratings for rmse
 	nums = 0 #this should be a string representation of what i read in for the line
-	rateing = 3.7 #the best value to start with according to document on assignment
+	rateing = 3.9 #the best value to start with according to document on assignment
 	for t in netflix_read(r) :
 		iter +=1
 		nums = t[(len(t)-2)]
 		if not ':' in nums : #it must be a customer if no colon
 			users_keeper.append(nums)
 			usercount +=1
-			currentuserrate = rateing + 0.05 #lets assume this guy is a movie buff by .05
+			currentuserrate = rateing + 0.09 #lets assume this guy is a movie buff by .05
 			currentuser = int(nums)
 			currentuserrate += currentmovierate
 			currentuserrate /= 2
@@ -120,9 +126,8 @@ def netflix_solve (r, w):
 		elif ':' in nums :
 			currentmovie = int(nums.rstrip(':')) #just remember you still have a : appended to the end
 			currentmovierate = rateing
-			w.write(nums + "\n") #+ "		"+ "movie:" + str(currentmovie) + "		rate:" + str(currentmovierate)  + "\n")
+			#w.write(nums + "\n") #+ "		"+ "movie:" + str(currentmovie) + "		rate:" + str(currentmovierate)  + "\n")
 		else:
 			w.write("we have a problem in netflix_solve and nums is: " + nums + "\n")
+	#users_keeper = find_needed_lines(users_keeper,w)
 	print_rmse(myzipper,w)
-	users_keeper = find_needed_lines(users_keeper)
-		
